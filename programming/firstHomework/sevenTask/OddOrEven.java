@@ -7,7 +7,8 @@ public class OddOrEven {
 		if( args.length != 1 ){
 			System.err.println("Give exactly one integer number as an argument!");
 		} else {
-			int num = Integer.parseInt(args[0]);
+			// Integer.parseInt() returns object, while valueOf returns primitive
+			int num = Integer.valueOf(args[0]);
 			String answer = (num % 2 == 1) ?
 			"odd" : "even";
 			System.out.println( answer );
