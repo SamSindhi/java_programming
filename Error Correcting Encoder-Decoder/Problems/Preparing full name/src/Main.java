@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class Main {
 
     public static String prepareFullName(String firstName, String lastName) {
-        if(firstName != null && firstName.isEmpty()) {
+        if(firstName == null) {
             return lastName;
         }
-        if(lastName != null && lastName.isEmpty()) {
+        if(lastName == null) {
             return firstName;
         }
         return firstName.concat(" " + lastName);

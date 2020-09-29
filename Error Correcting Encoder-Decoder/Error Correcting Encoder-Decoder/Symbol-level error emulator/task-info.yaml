@@ -105,6 +105,13 @@ files:
     }
 
   learner_created: false
+- name: src/correcter/ErrorEmulator.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/58/stages/312/implement
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/58/stages/312/implement">JetBrains
+    Academy</a>
+  time: Thu, 24 Sep 2020 00:55:35 UTC
+record: 1
