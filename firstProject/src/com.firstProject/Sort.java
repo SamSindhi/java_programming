@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Sort {
@@ -78,5 +79,64 @@ public class Sort {
         System.arraycopy(arr, 0, newArray, 0, arr.length);
         mergeSortPrivate(newArray, 0, newArray.length);
         return newArray;
+    }
+
+    private void swap(int first, int second) {
+        int aux = first;
+        first = second;
+        second = aux;
+    }
+
+    private int[] sortByItem(int[] arr, int number) {
+        if (number == 0) {
+            return arr;
+        }
+        if (arr[number] > number) {
+            swap(arr[number], number);
+            return  sortByItem(arr, --number);
+        }
+        return  sortByItem(arr, --number);
+    }
+
+    public static <T> T concatecate(T a, T b) {
+        if (!a.getClass().isArray() || !b.getClass().isArray()) {
+            throw new IllegalArgumentException("Please provide two arrays");
+        }
+        Class<?> resCompType;
+        Class<?> aCompType = a.getClass().getComponentType();
+        Class<?> bCompType = a.getClass().getComponentType();
+
+        if(aCompType.isAssignableFrom(bCompType)) {
+            resCompType = aCompType;
+        } else if(bCompType.isAssignableFrom(aCompType)) {
+            resCompType = bCompType;
+        } else {
+            throw new IllegalArgumentException("Types cannot be assigned");
+        }
+
+        int aLen = Array.getLength(a);
+        int bLen = Array.getLength(b);
+
+        @SuppressWarnings("unchecked")
+                T result = (T) Array.newInstance(resCompType, aLen + bLen);
+                System.arraycopy(a, 0, result, 0, aLen);
+                System.arraycopy(b, 0, result, aLen, bLen);
+        return result;
+    }
+
+    public int[] quickSort(int arr[]) {
+        if (arr.length == 1) {
+            return arr;
+        }
+        int[] left = new int[arr.length / 2];
+        final int length = arr.length % 2 == 0 ? arr.length / 2 : (arr.length + 1) / 2;
+        int[] right = new int[length];
+        System.arraycopy(arr, 0, left, 0, arr.length / 2 - 1);
+        System.arraycopy(arr, 0, right, length, arr.length - 1);
+        System.out.println(Arrays.toString(left));
+        System.out.println(Arrays.toString(right));
+        int[] leftRes = sortByItem(left, left.length);
+        int[] rightRes = sortByItem(right, right.length);
+        return concatecate(quickSort(leftRes), quickSort(rightRes));
     }
 }

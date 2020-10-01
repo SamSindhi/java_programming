@@ -138,7 +138,7 @@ public class Main {
 //		int[] sorted = sort.mergeSort(numberArray);
 //		int[] sortedArray = sort.insertionSort(numberArray);
 //		System.out.println(Arrays.toString(sort.merge(arr, 0, arr.length / 2, arr.length )));
-		System.out.println(Arrays.toString(sort.mergeSort(arr)));
+		System.out.println(Arrays.toString(sort.quickSort(arr)));
 
 
 //		int arrayLength = scanner.nextInt()
