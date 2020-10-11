@@ -98,14 +98,15 @@ public class Sort {
         return  sortByItem(arr, --number);
     }
 
-    public static <T> T concatecate(T a, T b) {
+    public <T> T concatecate(T a, T b) {
         if (!a.getClass().isArray() || !b.getClass().isArray()) {
             throw new IllegalArgumentException("Please provide two arrays");
         }
         Class<?> resCompType;
         Class<?> aCompType = a.getClass().getComponentType();
-        Class<?> bCompType = a.getClass().getComponentType();
+        Class<?> bCompType = b.getClass().getComponentType();
 
+        System.out.println(aCompType + " "  + bCompType);
         if(aCompType.isAssignableFrom(bCompType)) {
             resCompType = aCompType;
         } else if(bCompType.isAssignableFrom(aCompType)) {

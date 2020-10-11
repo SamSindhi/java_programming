@@ -1,0 +1,4 @@
+Some Random 
+Char 
+inside 
+text file in.txt
