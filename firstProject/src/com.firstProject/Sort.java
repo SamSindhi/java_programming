@@ -2,7 +2,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Sort {
-    public int[] selectionSort(int[] arr) {
+    public static int[] selectionSort(int[] arr) {
         for(int i = 0; i < arr.length; i++) {
             int min = (int) 10e6;
             int j = i;
@@ -19,7 +19,7 @@ public class Sort {
         return arr;
     }
 
-    public int[] insertionSort(int[] arr) {
+    public static int[] insertionSort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             int j = i;
             while(j >= 1 && arr[j] < arr[j - 1]) {
@@ -32,56 +32,111 @@ public class Sort {
         return arr;
     }
 
-    public void merge(int[] arr, int lowerBound, int intermediateBound, int upperBound ) {
-        int endFirstArray = intermediateBound - lowerBound + 1;
-        int endSecondArray = upperBound - intermediateBound + 1;
-
-        int[] firstArray = new int[endFirstArray];
-        for (int i = 0; i < firstArray.length - 1; i++) {
-            firstArray[i] = arr[lowerBound + i];
+    public static void sortFiveElements(int arr[]) {
+        int t;
+        // firstly by three swaps we find sor the smallest item
+        if (arr[4] < arr[0]) {
+            t = arr[4];
+            arr[4] = arr[0];
+            arr[0] = t;
         }
-        firstArray[endFirstArray - 1] = (int)10e7;
 
-        int[] secondArray = new int[endSecondArray];
-        for (int i = 0; i < secondArray.length - 1; i++) {
-            secondArray[i] = arr[intermediateBound + i];
+        if (arr[3] < arr[1]) {
+            t = arr[3];
+            arr[3] = arr[1];
+            arr[1] = t;
         }
-        secondArray[endSecondArray - 1] = (int)10e7;
 
-//        System.out.println(Arrays.toString(firstArray) + endFirstArray);
-//        System.out.println(Arrays.toString(secondArray) + endSecondArray);
+        if (arr[1] < arr[0]) {
+            t = arr[1];
+            arr[1] = arr[0];
+            arr[0] = t;
+        }
 
-        int i = 0;
-        int j = 0;
-        for (int m = lowerBound; m < upperBound ; m++) {
-            if(firstArray[i] <= secondArray[j]) {
-                arr[m] = firstArray[i];
-                i++;
+        // now: arr[0] <= arr[4]. arr[0] <= arr[1] <=  arr[3]
+        // insert arr[2] into arr[0] <= arr[1] <= arr[3]
+
+        if (arr[2] < arr[1]) {
+            t = arr[2];
+            arr[2] = arr[1];
+            if (t < arr[0]) {
+                arr[1] = arr[0];
+                arr[0] = t;
             } else {
-                arr[m] = secondArray[j];
-                j++;
+                arr[1] = t;
+            }
+        } else if (arr[3] < arr[2]) {
+            t = arr[2];
+            arr[2] = arr[3];
+            arr[3] = t;
+        }
+
+        // now arr[0] <= arr[4], arr[0] <= arr[1] <= arr[2] <= arr[3]
+        // insert arr[4] into arr[0] <= arr[1] <= arr[2] <= arr[3]
+        if (arr[4] < arr[2]) {
+            t = arr[4];
+            arr[4] = arr[3];
+            arr[3] = arr[2];
+            if(t < arr[1]){
+                arr[2] = arr[1];
+                arr[1] = t;
+            }
+        } else if(arr[4] < arr[3]) {
+            t = arr[4];
+            arr[4] = arr[3];
+            arr[3] = t;
+        }
+    }
+
+    public static void merge(
+            int[] a, int[] l, int[] r, int left, int right) {
+
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (l[i] <= r[j]) {
+                a[k++] = l[i++];
+            }
+            else {
+                a[k++] = r[j++];
             }
         }
-    }
-
-
-    private void mergeSortPrivate(int[] arr, int lowerBound, int upperBound) {
-        int middleBound = (lowerBound + upperBound) / 2;
-        if (lowerBound < upperBound) {
-            mergeSortPrivate(arr, lowerBound, middleBound);
-            mergeSortPrivate(arr, middleBound + 1, upperBound);
-            merge(arr, lowerBound, middleBound, upperBound);
+        while (i < left) {
+            a[k++] = l[i++];
+        }
+        while (j < right) {
+            a[k++] = r[j++];
         }
     }
 
-    public int[] mergeSort(int[] arr) {
-        int[] newArray = new int[arr.length];;
-        System.arraycopy(arr, 0, newArray, 0, arr.length);
-        mergeSortPrivate(newArray, 0, newArray.length);
-        return newArray;
+
+    public static void mergeSort(int[] arr, int length) {
+        if (length < 2) {
+            return;
+        }
+        int mid = length / 2;
+        int[] l = new int[mid];
+        int[] r = new int[length - mid];
+
+        for (int i = 0; i < mid; i++) {
+            l[i] = arr[i];
+        }
+        for (int i = mid; i < length; i++) {
+            r[i - mid] = arr[i];
+        }
+
+        mergeSort(l, mid);
+        mergeSort(r, length - mid);
+        merge(arr, l, r, mid,  length - mid);
     }
 
-    private void swap(int first, int second) {
+    public static int[] mergeSort(int[] arr) {
+        int[] newArr = new int[arr.length];
+        System.arraycopy(arr, 0, newArr, 0, arr.length);
+        mergeSort(newArr, newArr.length);
+        return newArr;
+    }
+
+    private void swap(int arr[], int first, int second) {
         int aux = first;
         first = second;
         second = aux;
@@ -92,8 +147,8 @@ public class Sort {
             return arr;
         }
         if (arr[number] > number) {
-            swap(arr[number], number);
-            return  sortByItem(arr, --number);
+            swap(arr, number, number);
+            return sortByItem(arr, --number);
         }
         return  sortByItem(arr, --number);
     }

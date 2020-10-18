@@ -1,0 +1,6 @@
+correcter/ErrorEmulator.java
+ correcter.ErrorEmulator
+correcter/StringManipulations.java
+ correcter.StringManipulations
+correcter/Main.java
+ correcter.Main

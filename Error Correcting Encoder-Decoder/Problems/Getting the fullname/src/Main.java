@@ -8,14 +8,29 @@ class User {
     }
 
     public void setFirstName(String firstName) {
-        // write your code here
+        if (firstName != null && !firstName.trim().isEmpty()) {
+            this.firstName = firstName;
+        } else {
+            this.firstName = "";
+        }
     }
 
     public void setLastName(String lastName) {
-        // write your code here
+        if (lastName != null && !lastName.trim().isEmpty()) {
+            this.lastName = lastName;
+        } else {
+            this.lastName = "";
+        }
     }
 
     public String getFullName() {
-        return ""; // write your code here
+        if (firstName.equals("") && lastName.equals("")) {
+            return "Unknown";
+        } else if(firstName.equals("")) {
+            return lastName;
+        } else if (lastName.equals("")) {
+            return firstName;
+        }
+        return firstName + " " +  lastName; // write your code here
     }
 }

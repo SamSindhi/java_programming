@@ -169,6 +169,71 @@ files:
         }
     }
   learner_created: false
+- name: src/correcter/ErrorEmulator.java
+  visible: true
+  text: |
+    package correcter;
+
+    import java.util.Random;
+
+
+    class ErrorEmulator {
+        public String errorEmulate (String initial) {
+            String original = initial;
+            final int originalLength = original.length();
+            Random random = new Random();
+            Random charRandom = new Random();
+            final int intervalChar = 35;
+            int intervalLength = 3;
+            for (int i = 0; i < originalLength; i+=3) {
+                int nextRandom = random.nextInt(intervalLength) + i;
+
+                char nextRandomChar = (char)(charRandom.nextInt(intervalChar) + 65);
+                if (originalLength % 3 != 0 && nextRandom > originalLength - 2) {
+                    break;
+                }
+                original = original.substring(0, nextRandom) + nextRandomChar + original.substring(nextRandom + 1);
+            }
+            return original;
+        }
+    }
+  learner_created: true
+- name: src/correcter/StringManipulations.java
+  visible: true
+  text: |
+    package correcter;
+
+    public class StringManipulations {
+        private String repeatString(String msg, int times) {
+            if (times == 0) {
+                return msg;
+            }
+            return msg + repeatString(msg, times - 1);
+        }
+
+        public String encode(String message) {
+            String msg = "";
+            for (int i = 0; i < message.length(); i++) {
+                String tripled = this.repeatString(String.valueOf(message.charAt(i)), 2);
+                msg = msg.concat(tripled);
+            }
+            return msg;
+        }
+
+        public String decode(String message) {
+            String msg = "";
+            for (int i = 0; i < message.length(); i+=3) {
+                char firstSymbol = message.charAt(i);
+                if(message.charAt(i+2) == message.charAt(i+1)) {
+                    firstSymbol = message.charAt(i+1);
+                }
+
+                msg = msg.concat(String.valueOf(firstSymbol));
+            }
+            return msg;
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/58/stages/314/implement
 status: Unchecked
 record: -1

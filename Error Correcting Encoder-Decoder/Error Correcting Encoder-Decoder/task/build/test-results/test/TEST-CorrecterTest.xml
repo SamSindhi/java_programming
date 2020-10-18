@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CorrecterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-24T22:03:39" hostname="Andreis-MBP" time="0.117">
+  <properties/>
+  <testcase name="start" classname="CorrecterTest" time="0.117"/>
+  <system-out><![CDATA[?[1;31m
+Start test 1?[0m
+> Some text to test
+Some text to test
+SSSooommmeee   ttteeexxxttt   tttooo   ttteeesssttt
+FSSooBmKmeQe  MtItee^[xxZttK  tQtoHo P ZtteDesYsMtt
+Some text to test
+?[1;31m
+Start test 2?[0m
+> send message to user with id #42354
+send message to user with id #42354
+ssseeennnddd   mmmeeessssssaaagggeee   tttooo   uuussseeerrr   wwwiiittthhh   iiiddd   ###444222333555444
+sSse_e]nndIdU  mSmOeessLss`aPagXgeeL [ ttKBoo  GuuEss^ee\rFr S ww[WiittQhah  U`iiLdd N #_#W442N233P5a5[44
+send message to user with id #42354
+?[1;31m
+Start test 3?[0m
+> thq
+thq
+ttthhhqqq
+tBthhOqqZ
+thq
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

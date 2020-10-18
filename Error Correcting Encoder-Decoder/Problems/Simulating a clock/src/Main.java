@@ -4,6 +4,11 @@ class Clock {
     int minutes = 0;
 
     void next() {
-        // implement me
+        if (++this.minutes == 60) {
+            if (++this.hours == 13) {
+                this.hours = 1;
+            }
+            this.minutes = 0;
+        }
     }
 }
