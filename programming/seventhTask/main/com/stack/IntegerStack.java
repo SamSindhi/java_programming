@@ -1,4 +1,4 @@
-package stack;
+package com.stack;
 
 import java.util.Arrays;
 
@@ -19,7 +19,7 @@ class IntegerStack {
   public String getStack() {
     String stringStack;
     for (int i = 0; i < lastPosition; i++) {
-      stringStack += stack[i];
+      stringStack += stack[i] + ", ";
     }
 
     return stringStack;
