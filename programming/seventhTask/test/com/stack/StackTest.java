@@ -51,7 +51,7 @@ import org.junit.Test;
    }
 
    @Test
-   public viod checkMultipleMethods() {
+   public void checkMultipleMethods() {
      IntegerStack stack = new IntegerStack();
      final int stackSize = 10;
      for(int i = 0; i < stackSize; i++) {
@@ -60,7 +60,24 @@ import org.junit.Test;
 
     assertEquals(10, stack.size());
     assertEquals("1, 2, 3, 4, 5, 6, 7, 8, 9, ", stack.getStack());
+    
+    for(int i = stackSize; i >= stackSize; i--) {
+      stack.pull();
+    }
+    assertEquals(true, stack.isEmpty());
+   }
 
-
+   @Test              
+   public void checkEmptyPullStack() {
+    IntegerStack stack = new IntegerStack();
+    final int stackSize = 15;
+    for(int i = 0; i < stackSize; i++) {
+       stack.push(i);
+    }
+     
+    for(int i = stackSize; i >= stackSize; i--) {
+     stack.pull();
+    }
+    assertEquals(true, stack.isEmpty());
    }
  }
