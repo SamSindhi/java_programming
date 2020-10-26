@@ -1,23 +1,24 @@
 package com.stack;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 class IntegerStack {
-  static final initialLength = 100;
-  static final additionalLength = 50;
+  static final int initialLength = 100;
+  static final int additionalLength = 50;
   private int[] stack;
   private int lastPosition = 0;
   
   public IntegerStack(int initialSize) {
-    if(initialSize == null) {
-      this.stack = new int[initialLength];
-    } else {
-      this.stack = new int[initialSize];
-    }
+    this.stack = new int[initialSize];
+  }
+
+  public IntegerStack() {
+    this.stack = new int[initialLength];
   }
 
   public String getStack() {
-    String stringStack;
+    String stringStack = "";
     for (int i = 0; i < lastPosition; i++) {
       stringStack += stack[i] + ", ";
     }
@@ -44,15 +45,16 @@ class IntegerStack {
     lastPosition++;
   }
 
-  public void size() {
+  public int size() {
     return lastPosition;
   }
 
-  public void pull() {
+  public void pull() throws NoSuchElementException {
     if(isEmpty()) {
-      throw NoSuchElementException;
+      throw new NoSuchElementException("Stack is empty.");
     } else {
       stack[lastPosition] = 0;
       lastPosition--;
     }
   }
+}

@@ -1,13 +1,16 @@
 package com.stack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
 import org.junit.Test;
+import java.util.NoSuchElementException;
 
  public class StackTest {
    @Test 
    public void emptyTest() {
     IntegerStack stack = new IntegerStack();
-    assertEquals(true, stack.isEmpty(), "Stack should be empty in initializing");
+    assertEquals("Stack should be empty in initializing",  stack.isEmpty(), true);
    }
 
    @Test 
@@ -16,14 +19,14 @@ import org.junit.Test;
     pullStack.push(10);
     pullStack.push(11);
     pullStack.pull();
-    assertEquals(pullStack.getStack(), "10, ", "Stack should have erased last element");
+    assertEquals("After pull() last element should be deleted", "10, ", pullStack.getStack());
    }
 
    @Test 
    public void oneElementNotEmptyStack() {
      IntegerStack stack = new IntegerStack();
      stack.push(10);
-     assertEquals(1, stack.size());
+     assertEquals("Stack size should equal one in this case",stack.size(), 1);
    }
 
    @Test
@@ -44,10 +47,10 @@ import org.junit.Test;
       IntegerStack oneStack = new IntegerStack();
       oneStack.push(10);
 
-      assertEquals(1, oneStack.size());
+      assertEquals("Size should equal one",oneStack.size(), 1);
       
       IntegerStack zeroStack = new IntegerStack();
-      assertEquals(0, zeroStack.size());
+      assertEquals("Size should be zero", zeroStack.size(), 0);
    }
 
    @Test
@@ -58,13 +61,13 @@ import org.junit.Test;
        stack.push(i);
      }
 
-    assertEquals(10, stack.size());
-    assertEquals("1, 2, 3, 4, 5, 6, 7, 8, 9, ", stack.getStack());
+    assertEquals("Stack size should be ten", stack.size(), 10);
+    assertEquals("Expected stack content", stack.getStack(), "1, 2, 3, 4, 5, 6, 7, 8, 9, ");
     
     for(int i = stackSize; i >= stackSize; i--) {
       stack.pull();
     }
-    assertEquals(true, stack.isEmpty());
+    assertEquals("Empty stack test", stack.isEmpty(), true);
    }
 
    @Test              
@@ -78,6 +81,6 @@ import org.junit.Test;
     for(int i = stackSize; i >= stackSize; i--) {
      stack.pull();
     }
-    assertEquals(true, stack.isEmpty());
+    assertEquals("Empty stack after all elements deletion", stack.isEmpty(), true);
    }
  }
