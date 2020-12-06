@@ -1,0 +1,3 @@
+interface Reversable {
+  void reverse();
+}
