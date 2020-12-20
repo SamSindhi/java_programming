@@ -4,7 +4,7 @@ import java.lang.NumberFormatException;
 import java.util.Iterator;
 import java.io.*;
 
-class Championship {
+public class Championship {
   private ArrayList<WeightLifter> weightLifters = new ArrayList<>();
   
   public Championship(String filename) {
@@ -51,6 +51,7 @@ class Championship {
     String showStr = "";
     while(it.hasNext()) {
       showStr += it.next().show();
+      showStr += "\n";
     }
     return showStr;
   }
@@ -58,10 +59,9 @@ class Championship {
   public ArrayList<WeightLifter> strongerThan(WeightLifter weightLifter){
     ArrayList<WeightLifter> stronger = new ArrayList<>();
 
-    Iterator<WeightLifter> it = weightLifters.iterator();
-    while(it.hasNext()){
-      if(it.next().weight > weightLifter.weight){
-        stronger.add(it.next());
+    for(WeightLifter w : weightLifters){
+      if(w.getWeight() > weightLifter.getWeight()) {
+        stronger.add(w);
       }
     }
 
@@ -83,12 +83,12 @@ class Championship {
     int minWeight = 301;
     WeightLifter weightLifter = null;
     for(WeightLifter w : weightLifters) {
-      if(w.weight < minWeight) {
-        minWeight = w.weight;
-        weightLifter.make(w.name, w.weight);
-        weightLifters.remove(w);
+      if(w.getWeight() < minWeight) {
+        minWeight = w.getWeight();
+        weightLifter = w;
       }
     }
+    weightLifters.remove(weightLifter);
     return weightLifter;
   }
 

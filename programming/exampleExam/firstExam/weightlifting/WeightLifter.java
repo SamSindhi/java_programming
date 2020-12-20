@@ -2,16 +2,12 @@ package weightlifting;
 
 import java.lang.NumberFormatException;
 
-class WeightLifter {
+public class WeightLifter {
   String name;
   int weight;
   private static WeightLifter strongestWeightLifter = null;
 
   private WeightLifter(String name, int weight) {
-    if(strongestWeightLifter == null || strongestWeightLifter.weight < weight) {
-      strongestWeightLifter.name = name;
-      strongestWeightLifter.weight = weight;
-    }
     this.weight = weight;
     this.name = name;
   }
@@ -23,6 +19,13 @@ class WeightLifter {
         if(Character.isDigit(name.charAt(i))) {
           return null;
         }
+        i++;
+      }
+      if(weight > 300 || weight < 0) {
+        return null;
+      }
+      if(strongestWeightLifter == null || strongestWeightLifter.weight < weight) {
+        strongestWeightLifter = new WeightLifter(name, weight);
       }
       return new WeightLifter(name, weight);
     } catch (NumberFormatException e) {
@@ -33,16 +36,22 @@ class WeightLifter {
   public int getWeight() {
     return this.weight;
   }
+  public String getName() {
+    return this.name;
+  }
 
   public boolean strongerThan(WeightLifter w) {
     return this.weight > w.weight;
   }
 
   public String show() {
+    if(this.name == null) {
+      return "null";
+    }
     return this.name + " - " + this.weight + "kg"; 
   }
 
-  public WeightLifter getStrongestWeightLifter() {
+  public static WeightLifter getStrongestWeightLifter() {
     return strongestWeightLifter;
   }
 }
