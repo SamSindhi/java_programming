@@ -1,0 +1,11 @@
+potato, 200
+asda
+823
+12 sdf
+aloha, 5000
+aloha, 4995
+cucumber, 350
+olivie, 320
+olivie, 350
+lucky, 3000
+unlucky 3333

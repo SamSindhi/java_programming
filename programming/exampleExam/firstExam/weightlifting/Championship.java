@@ -88,7 +88,7 @@ public class Championship {
         weightLifter = w;
       }
     }
-    weightLifters.remove(weightLifter);
+    weightLifters.remove(w);
     return weightLifter;
   }
 
